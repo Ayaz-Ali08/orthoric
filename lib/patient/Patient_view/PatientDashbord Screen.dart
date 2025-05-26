@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/patient/Patient_Model/PatientDashBard_model.dart';
@@ -12,15 +13,31 @@ class PatientDashBoardScreen extends StatefulWidget {
   State<PatientDashBoardScreen> createState() => _PatientDashBoardScreenState();
 }
 
-class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> {
+class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> with SingleTickerProviderStateMixin {
   final PatientController _controller = PatientController();
   late PatientDashbordModel _patient;
   final TextEditingController _treatmentController = TextEditingController();
   bool _isLoading = false;
+  late Animation<Offset> _animation;
+  late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _animation = Tween<Offset>(
+        begin: Offset(0, -1), // Start from offscreen
+        end: Offset.zero)
+        .animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.linear,
+    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
     _loadPatientData();
   }
 
@@ -45,7 +62,11 @@ class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> {
       setState(() => _isLoading = false);
     }
   }
-
+@override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +79,16 @@ class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> {
               SizedBox(
                 height: 90,
               ),
-              Text(
-                _patient.name,
-                style: TextStyle(fontSize: 23, fontWeight: FontWeight.w500),
+              AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText(
+                      _patient.name,
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23
+                      )
+                  )],
               ),
               Expanded(
                 child: _isLoading

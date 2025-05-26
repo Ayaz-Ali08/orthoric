@@ -47,30 +47,57 @@ class MyApp extends StatelessWidget {
       ),
 
       initialRoute: '/',
-      routes: {
-        '/': (context) => const SplashScreen(),
-        '/login': (context) => const LoginScreen(),
-        '/tmodashboard': (context) => const DashboardScreen(),
-        '/todayAppointment': (context) =>  TodayAppointmentScreen(),
-        '/missedAppointments': (context) => const MissedAppointmentScreen(),
-        '/pendingAppointments': (context) =>  PendingAppointmentScreen(),
-        '/treatmentProgress': (context) => const TreatmentProgressScreen(),
-        '/patientrecord_1':(context)=> const PatientRecord_1Scren(),
-        '/patientrecord_2':(context)=> const PatientRecord_2Scren(),
-        '/patientrecord_3':(context)=> const Patientrecord3scren(),
-        '/patientrecord_4':(context)=> const Patientrecord4screen(),
-        '/patientrecord_5':(context)=> const Patientrecord5screen(),
-        '/AdminDashbord':(context)=>  Admin_DashboardScreen(),
-        '/tmoRegistration':(context)=>  TmoregistrionScreen(),
-        '/tmoList':(context)=>  TMOListScreen(),
-        '/dateWiseRecord': (context) => DatewiseRecord_Screen(),
-        '/receptiondashboard':(context)=>  ReceptionDashbordScreen(),
-        '/inlinePatient':(context)=>  InlinePatientScreen(),
-        '/newPatientEntry':(context)=>  PatientRegistion_ScreenREc(),
-        '/tmodateAssigning':(context)=>  TmoAndDateAssigScreen(),
-        '/patientDashbord':(context)=>  PatientDashBoardScreen(patientId: "1"),
+      onGenerateRoute: (settings) {
+        if (settings.name == '/') {
+          return MaterialPageRoute(builder: (context) => const SplashScreen());
+        }
 
+        final routes = {
+          '/login': const LoginScreen(),
+          '/tmodashboard': const DashboardScreen(),
+          '/todayAppointment': TodayAppointmentScreen(),
+          '/missedAppointments': const MissedAppointmentScreen(),
+          '/pendingAppointments': PendingAppointmentScreen(),
+          '/treatmentProgress': const TreatmentProgressScreen(),
+          '/patientrecord_1': const PatientRecord_1Scren(),
+          '/patientrecord_2': const PatientRecord_2Scren(),
+          '/patientrecord_3': const Patientrecord3scren(),
+          '/patientrecord_4': const Patientrecord4screen(),
+          '/patientrecord_5': const Patientrecord5screen(),
+          '/AdminDashbord': Admin_DashboardScreen(),
+          '/tmoRegistration': TmoregistrionScreen(),
+          '/tmoList': TMOListScreen(),
+          '/dateWiseRecord': DatewiseRecord_Screen(),
+          '/receptiondashboard': ReceptionDashbordScreen(),
+          '/inlinePatient': InlinePatientScreen(),
+          '/newPatientEntry': PatientRegistion_ScreenREc(),
+          '/tmodateAssigning': TmoAndDateAssigScreen(),
+          '/patientDashbord': PatientDashBoardScreen(patientId: "1"),
+        };
+
+        final route = routes[settings.name];
+
+        if (route != null) {
+          return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) => route,
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.linear;
+
+              // var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+          );
+        }
+
+        return null;
       },
+
     );
   }
 }

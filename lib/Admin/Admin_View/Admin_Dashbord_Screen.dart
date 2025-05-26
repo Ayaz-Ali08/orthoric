@@ -1,13 +1,49 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:orthorec/Admin/Admin_Controller/Admin_Dashbord_Controler.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 
-class Admin_DashboardScreen extends StatelessWidget {
+class Admin_DashboardScreen extends StatefulWidget {
 
-  final Dashbord_Controller _controller = Dashbord_Controller();
 
   Admin_DashboardScreen({super.key});
+
+  @override
+  State<Admin_DashboardScreen> createState() => _Admin_DashboardScreenState();
+}
+
+class _Admin_DashboardScreenState extends State<Admin_DashboardScreen> with SingleTickerProviderStateMixin{
+  final Dashbord_Controller _controller = Dashbord_Controller();
+
+  late AnimationController _animationController;
+
+  late Animation<Offset> _animation;
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _animation = Tween<Offset>(
+        begin: Offset(0, -1), // Start from offscreen
+        end: Offset.zero)
+        .animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.linear,
+    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
+  }
+  @override
+  void dispose() {
+  _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +57,17 @@ class Admin_DashboardScreen extends StatelessWidget {
               const SizedBox(
                 height: 90,
               ),
-              Text("Dr.Khan",style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500
-              ),),
+              AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText(
+                      "Dr.Khan Shab",
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 23
+                      )
+                  )],
+              ),
               const SizedBox(
                 height: 60,
               ),

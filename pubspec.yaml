@@ -41,6 +41,7 @@ dependencies:
   permission_handler:
   dropdown_button2:
   intl:
+  animated_text_kit:
 
 
 

@@ -14,15 +14,31 @@ class ReceptionDashbordScreen extends StatefulWidget {
       _ReceptionDashbordScreenState();
 }
 
-class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> {
+class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> with SingleTickerProviderStateMixin {
   final ReceptionDashboradController _controller =
       ReceptionDashboradController();
   late List<ReceptionDashBordModels> _entries;
   bool _isLoading = false;
+  late AnimationController _animationController ;
+  late Animation<Offset> _animation ;
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _animation = Tween<Offset>(
+        begin: Offset(0, -1), // Start from offscreen
+        end: Offset.zero)
+        .animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.linear,
+    ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
     _loadEntries();
   }
 
@@ -32,52 +48,32 @@ class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> {
     setState(() => _isLoading = false);
   }
 
-  // Future<void> _showNewEntryDialog() async {
-  //   final result = await showDialog(
-  //     context: context,
-  //     builder: (context) => const NewEntryDialog(),
-  //   );
-  //
-  //   if (result != null) {
-  //     await _handleNewEntry(result);
-  //   }
-  // }
-
-  Future<void> _handleNewEntry(Map<String, dynamic> data) async {
-    setState(() => _isLoading = true);
-    try {
-      await _controller.createNewEntry(data);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('New entry created successfully')),
-      );
-      await _loadEntries();
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: ${e.toString()}')),
-      );
-    } finally {
-      setState(() => _isLoading = false);
-    }
+@override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Appointments_AppBar(Theme.of(context).colorScheme.primary),
-          SizedBox(
-            height: 330,
-          ),
-          _receptiondashboardButton(
-              img: "Assets/In_Line_Patient", ontap: () {
-                Navigator.pushNamed(context, "/inlinePatient");
-          }, label: 'Inline Patient'),
-          _receptiondashboardButton(
-              img: "Assets/In_Line_Patient", ontap: () {
-                Navigator.pushNamed(context, "/newPatientEntry");
-          }, label: 'New Entry'),
-        ],
+      body: SlideTransition(
+        position: _animation,
+        child: Column(
+          children: [
+            Appointments_AppBar(Theme.of(context).colorScheme.primary),
+            SizedBox(
+              height: 330,
+            ),
+            _receptiondashboardButton(
+                img: "Assets/In_Line_Patient", ontap: () {
+                  Navigator.pushNamed(context, "/inlinePatient");
+            }, label: 'Inline Patient'),
+            _receptiondashboardButton(
+                img: "Assets/In_Line_Patient", ontap: () {
+                  Navigator.pushNamed(context, "/newPatientEntry");
+            }, label: 'New Entry'),
+          ],
+        ),
       ),
     );
   }

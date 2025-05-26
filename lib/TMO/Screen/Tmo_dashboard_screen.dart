@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/TMO/Tmo_Controller/dashboard_controller.dart';
@@ -10,17 +11,37 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with SingleTickerProviderStateMixin {
   final DashboardController _controller = DashboardController();
   late Future<Map<String, dynamic>> _profileFuture;
-
-  // late Future<List<Map<String, dynamic>>> _quickActionsFuture;
+  late AnimationController _animationController;
+  late Animation<Offset> _animation;
 
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _animation = Tween<Offset>(
+            begin: Offset(0, -1), // Start from offscreen
+            end: Offset.zero)
+        .animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.linear,
+    ));
     _profileFuture = _controller.fetchDoctorProfile();
-    // _quickActionsFuture = _controller.fetchQuickActions();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _animationController.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -39,7 +60,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               }
-
               final profile = snapshot.data!;
               return Stack(
                 clipBehavior: Clip.none,
@@ -52,9 +72,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 55),
-                        Text(
-                          profile['name'],
-                          style: Theme.of(context).textTheme.headlineSmall,
+                        AnimatedTextKit(
+                          animatedTexts: [
+                            WavyAnimatedText(
+                                profile['name'],
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 23
+                              )
+                            )],
                         ),
                         const SizedBox(height: 30),
                         Card(
@@ -74,7 +101,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       'Experience', profile['experience']),
                                   _buildProfileRow(
                                       'Specialty', profile['specialty']),
-                                  _buildProfileRow('Number', profile['phone']),
+                                  _buildProfileRow(
+                                      'Number', profile['phone']),
                                   const SizedBox(height: 16),
                                 ],
                               ),
@@ -223,14 +251,6 @@ void showAppointmentPopup(BuildContext context) {
                   spacing: 24,
                   runSpacing: 16,
                   children: [
-                    // CircularIconButton(
-                    //   icon: Icons.calendar_today,
-                    //   label: 'Today\n appointment',
-                    //   onTap: () {
-                    //     Navigator.pushNamed(context, '/todayAppointment');
-                    //     // Handle tap
-                    //   },
-                    // ),
                     Rectanglerounded_Button(
                       lable: "Today Appointment",
                       imagepath: "Assets/Today_Appointment.svg",
@@ -252,14 +272,6 @@ void showAppointmentPopup(BuildContext context) {
                         Navigator.pushNamed(context, '/missedAppointments');
                       },
                     ),
-                    // CircularIconButton(
-                    //   icon: Icons.pending_actions_outlined,
-                    //   label: 'Pending\n appointment',
-                    //   onTap: () {
-                    //     Navigator.pushNamed(context, '/pendingAppointments');
-                    //     // Handle tap
-                    //   },
-                    // ),
                   ],
                 ),
                 const SizedBox(height: 16),
