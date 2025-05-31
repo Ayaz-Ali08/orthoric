@@ -56,24 +56,21 @@ class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> with 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlideTransition(
-        position: _animation,
-        child: Column(
-          children: [
-            Appointments_AppBar(Theme.of(context).colorScheme.primary),
-            SizedBox(
-              height: 330,
-            ),
-            _receptiondashboardButton(
-                img: "Assets/In_Line_Patient", ontap: () {
-                  Navigator.pushNamed(context, "/inlinePatient");
-            }, label: 'Inline Patient'),
-            _receptiondashboardButton(
-                img: "Assets/In_Line_Patient", ontap: () {
-                  Navigator.pushNamed(context, "/newPatientEntry");
-            }, label: 'New Entry'),
-          ],
-        ),
+      body: Column(
+        children: [
+          Appointments_AppBar(Theme.of(context).colorScheme.primary),
+          SizedBox(
+            height: 330,
+          ),
+          _receptiondashboardButton(
+              img: "Assets/In_Line_Patient", ontap: () {
+                Navigator.pushNamed(context, "/inlinePatient");
+          }, label: 'Patient Waiting List'),
+          _receptiondashboardButton(
+              img: "Assets/In_Line_Patient", ontap: () {
+                Navigator.pushNamed(context, "/newPatientEntry");
+          }, label: 'New Entry'),
+        ],
       ),
     );
   }

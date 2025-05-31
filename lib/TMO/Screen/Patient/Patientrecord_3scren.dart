@@ -54,15 +54,15 @@ class _Patientrecord3screnState extends State<Patientrecord3scren> {
                       // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 20,),
                         Text(
-                          "1.1 PRE-TREATMENT STUDY MODEL",
+                          "  PRE-TREATMENT STUDY MODEL",
                           style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                              fontSize: 18, fontWeight: FontWeight.w500),
                         ),
-                        Text(
-                            "  (Minimum Set of clear , non tempered\n  photographs)"),
-                        Text(
-                            "  (Original dental casts {Non-tempered, showing original\n  impression surface, properly trimmed*} are mandatory part of\n  records.  Additionally, insert 3D Image or photographic views\n  of dental casts[Maroon background for 2D & white for 3D])"),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

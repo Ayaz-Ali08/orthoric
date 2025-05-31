@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:orthorec/Admin/Admin_Controller/TMOList_AdmCon.dart';
-import 'package:orthorec/Admin/Admin_Model/TMOList_Admmodel.dart';
 import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
+import 'package:orthorec/Supervisor/Supervisor_Model/TMOList_Admmodel.dart';
+import 'package:orthorec/Supervisor/Supervisor_Controller/TMOList_AdmCon.dart';
 
 class TMOListScreen extends StatelessWidget {
   final TMOController _controller = TMOController();

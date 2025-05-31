@@ -47,37 +47,25 @@ class _Patientrecord4screenState extends State<Patientrecord4screen> {
               ? const Center(child: CircularProgressIndicator())
               : LayoutBuilder(
             builder: (context, constraints) {
-              // final screenHeight = MediaQuery.of(context).size.height;
-              // final availableHeight = screenHeight -
-              //     kToolbarHeight -
-              //     32; // adjust for AppBar + padding
                return Column(
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: 20,
+                  ),
                   Text(
-                    "SECTION 1. PRE-TREATMENT ASSESSMENT ",
+                    "  PRE-TREATMENT RADIOGRAPH  \n OPG ",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "  1.1 Pre-Treatment photographs ",
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    "  EXTRA-ORAL ",
-                    style: TextStyle(
-                      fontSize: 16,
                     ),
                   ),
                   Spacer(),
                   Row(
                     children: [
                       Expanded(
+                        flex: 1,
                         child: PhotoUploadCard(
                           photo: _controller.photos[4],
                           onAddPhoto: () =>

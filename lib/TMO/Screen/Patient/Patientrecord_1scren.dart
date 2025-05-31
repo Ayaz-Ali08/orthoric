@@ -52,22 +52,12 @@ class _PatientRecord_1ScrenState extends State<PatientRecord_1Scren> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: 20,),
                       const Text(
-                        'SECTION 1. PRE-TREATMENT ASSESSMENT',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: 6),
-                      const Text(
-                        '1.1 PRE-TREATMENT PHOTOGRAPH : \n   EXTRA-ORAL',
+                        '  PRE-TREATMENT PHOTOGRAPH : \n   EXTRA-ORAL',
                         style: TextStyle(fontSize: 18 , fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(height: 6),
-                      const Text(
-                        '  (minimum set of clear, non-tempered \n   photographs with White/light background)',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

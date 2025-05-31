@@ -21,6 +21,6 @@ class TmoAndDateAsigning {
         Gender: "Male",
         phone: "+92-344-0000000",
         city: "Mingora",
-        Tmo: "Dr.Waqar");
+          Tmo: "Dr.Waqar");
   }
 }

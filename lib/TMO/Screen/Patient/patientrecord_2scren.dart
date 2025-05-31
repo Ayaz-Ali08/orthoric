@@ -52,17 +52,11 @@ class _PatientRecord_2ScrenState extends State<PatientRecord_2Scren> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 20,),
                         Text(
-                          "1.1 PRE-TREATMENT PHOTOGRAPHS \n  EXTRA ORAL",
+                          "  PRE-TREATMENT PHOTOGRAPHS \n  INTRA-ORAL",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "  (Minimum Set of clear , non tempered\n  photographs)",
-                          style: TextStyle(),
                         ),
                         SizedBox(
                           height: 10,

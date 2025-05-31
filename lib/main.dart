@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:orthorec/Admin/Admin_View/Admin_Dashbord_Screen.dart';
 import 'package:orthorec/Reception/Reception_View/ReceptionDashBoardScreen.dart';
 import 'package:orthorec/View/splash_screen.dart';
 import 'package:orthorec/patient/Patient_view/PatientDashbord%20Screen.dart';
@@ -12,12 +11,15 @@ import 'package:orthorec/tmo/Screen/Patient/Patientrecord_3scren.dart';
 import 'package:orthorec/tmo/Screen/Patient/Patientrecord_4Screen.dart';
 import 'package:orthorec/tmo/Screen/Patient/patientrecord_2scren.dart';
 import 'package:orthorec/tmo/Screen/TreatmentProgress_Screen.dart';
-import 'Admin/Admin_View/DateWiseRecord_Screen.dart';
-import 'Admin/Admin_View/TMOList_admScreen.dart';
-import 'Admin/Admin_View/TMOregistrion_Screen.dart';
 import 'Reception/Reception_View/InlinePatient_Screen.dart';
 import 'Reception/Reception_View/PatientRegistrationRec.dart';
 import 'Reception/Reception_View/TmoDateAsigning_ReceptionScreen.dart';
+import 'Supervisor/Supervisor_View/Supervisor_Dashbord_Screen.dart';
+import 'Supervisor/Supervisor_View/PatientRecord_Screen.dart';
+import 'Supervisor/Supervisor_View/TMOList_admScreen.dart';
+import 'Supervisor/Supervisor_View/TMOregistrion_Screen.dart';
+import 'TMO/Screen/AppointmentAssiging_Screen.dart';
+import 'TMO/Screen/Patient/TableView.dart';
 import 'View/login_screen.dart';
 import 'TMO/Screen/Tmo_dashboard_screen.dart';
 
@@ -64,7 +66,8 @@ class MyApp extends StatelessWidget {
           '/patientrecord_3': const Patientrecord3scren(),
           '/patientrecord_4': const Patientrecord4screen(),
           '/patientrecord_5': const Patientrecord5screen(),
-          '/AdminDashbord': Admin_DashboardScreen(),
+          '/table':  CephalometricAnalysisTable(),
+          '/AdminDashbord': Supervisor_DashboardScreen(),
           '/tmoRegistration': TmoregistrionScreen(),
           '/tmoList': TMOListScreen(),
           '/dateWiseRecord': DatewiseRecord_Screen(),
@@ -73,6 +76,7 @@ class MyApp extends StatelessWidget {
           '/newPatientEntry': PatientRegistion_ScreenREc(),
           '/tmodateAssigning': TmoAndDateAssigScreen(),
           '/patientDashbord': PatientDashBoardScreen(patientId: "1"),
+          '/appoinmentAssigning': AppointmentAssigingScreen(),
         };
 
         final route = routes[settings.name];

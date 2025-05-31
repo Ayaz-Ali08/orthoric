@@ -1,19 +1,20 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:orthorec/Admin/Admin_Controller/Admin_Dashbord_Controler.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 
-class Admin_DashboardScreen extends StatefulWidget {
+import '../Supervisor_Controller/Supervisor_Dashbord_Controler.dart';
+
+class Supervisor_DashboardScreen extends StatefulWidget {
 
 
-  Admin_DashboardScreen({super.key});
+  Supervisor_DashboardScreen({super.key});
 
   @override
-  State<Admin_DashboardScreen> createState() => _Admin_DashboardScreenState();
+  State<Supervisor_DashboardScreen> createState() => _Supervisor_DashboardScreenState();
 }
 
-class _Admin_DashboardScreenState extends State<Admin_DashboardScreen> with SingleTickerProviderStateMixin{
+class _Supervisor_DashboardScreenState extends State<Supervisor_DashboardScreen> with SingleTickerProviderStateMixin{
   final Dashbord_Controller _controller = Dashbord_Controller();
 
   late AnimationController _animationController;

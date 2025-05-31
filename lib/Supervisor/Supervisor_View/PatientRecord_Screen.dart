@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
-import '../Admin_Controller/DateWiseRecord_controller.dart';
+
+import '../Supervisor_Controller/PatientRecord_controller.dart';
 
 class DatewiseRecord_Screen extends StatefulWidget {
   @override

@@ -1,5 +1,4 @@
-
-import 'package:orthorec/Admin/Admin_Model/TmoRegistration_Model.dart';
+import '../Supervisor_Model/TmoRegistration_Model.dart';
 
 class TMORegistrationCon {
   Future<void> SubmitForm(TmoregistrationModel  data )async {

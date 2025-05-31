@@ -145,6 +145,14 @@ class _DashboardScreenState extends State<DashboardScreen>
               Navigator.pushNamed(context, "/patientrecord_1");
             },
           ),
+          Rectanglerounded_Button(
+            lable: "Appointments",
+            imagepath: "Assets/Doctor_Registration.svg",
+            // "Assets/logo.png",
+            ontap: () {
+              Navigator.pushNamed(context, "/appoinmentAssigning");
+            },
+          ),
         ],
       ),
     );

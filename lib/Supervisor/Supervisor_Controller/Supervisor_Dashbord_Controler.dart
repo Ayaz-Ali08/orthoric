@@ -1,11 +1,12 @@
-import 'package:orthorec/Admin/Admin_Model/Admin_Dashbord_Model.dart';
+
+import '../Supervisor_Model/Supervisor_Dashbord_Model.dart';
 
 class Dashbord_Controller {
   List<DashbordItem> getMenuItems() {
     return const [
       DashbordItem(
         id: '1',
-        title: 'Inline Patient',
+        title: 'Patient Waiting List',
         img: "Assets/In_Line_Patient.svg",
         route: '/inlinePatient',
       ),
@@ -29,7 +30,7 @@ class Dashbord_Controller {
       ),
       DashbordItem(
         id: '5',
-        title: 'Date Wise Record',
+        title: 'Patient Record',
         img: "Assets/Datewise_record.svg",
         route: '/dateWiseRecord',
       ),

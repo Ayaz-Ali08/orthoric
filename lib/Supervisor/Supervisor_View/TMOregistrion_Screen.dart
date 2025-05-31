@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orthorec/Admin/Admin_Controller/TMORegistration_controller.dart';
-import 'package:orthorec/Admin/Admin_Model/TmoRegistration_Model.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
+
+import '../Supervisor_Controller/TMORegistration_controller.dart';
+import '../Supervisor_Model/TmoRegistration_Model.dart';
 
 class TmoregistrionScreen extends StatefulWidget {
   const TmoregistrionScreen({super.key});

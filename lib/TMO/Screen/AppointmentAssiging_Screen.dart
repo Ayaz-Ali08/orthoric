@@ -1,130 +1,95 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
-import '../Reception_Controller/TmoDateAsigning_ReceptionController.dart';
+import 'package:orthorec/TMO/Tmo_Controller/AppointmentAssiging_controller.dart';
 
-class TmoAndDateAssigScreen extends StatefulWidget {
-
-  TmoAndDateAssigScreen({super.key});
+class AppointmentAssigingScreen extends StatefulWidget {
+  const  AppointmentAssigingScreen({super.key});
 
   @override
-  State<TmoAndDateAssigScreen> createState() => _TmoAndDateAssigScreenState();
+  State<AppointmentAssigingScreen> createState() => _AppointmentAssigingScreenState();
 }
 
-class _TmoAndDateAssigScreenState extends State<TmoAndDateAssigScreen> {
-  final TmodateAssigningController _controller = TmodateAssigningController();
+class _AppointmentAssigingScreenState extends State<AppointmentAssigingScreen> {
+  final AppoinmentAssigning_Cont _controller = AppoinmentAssigning_Cont();
 
   @override
   Widget build(BuildContext context) {
-    final patient = _controller.getmodelData();
-
+    final tmo = _controller.getModelData();
     return Scaffold(
-      body: Stack(children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            DashbordAppBar(),
-            const SizedBox(height: 90),
-            Text(
-              patient.name,
-              style: const TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              DashbordAppBar(),
+              const SizedBox(height: 90),
+              Text(
+                tmo.Name,
+                style: const TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            _buildInfoCard(),
-            DropdownButton(),
-            SingleDateSelector(),
+              _buildInfoCard(),
+              DropdownButton(),
+              SingleDateSelector(),
+            ],
+          ),
+          Positioned(
+              left: MediaQuery.of(context).size.width / 2 - 75,
+              top: 60,
+              child: CircleAvatar(
+                radius: 70,
+                backgroundImage: NetworkImage(
+                    "https://images.drlogy.com/assets/uploads/img/practice-profile/hospitals/profile/dant-aarogyam-seva-sadan-e50f7e6102d-36c694851ab.png"),
+              ))
+        ],
+      ),
 
-          ],
-        ),
-        Positioned(
-          left: MediaQuery.of(context).size.width/2-75,
-            top: 60,
-            child: CircleAvatar(
-              radius: 70,
-          backgroundImage: NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-PIqzX1p7ueIQSi5p29gEtEf165sYb_DhWw&s"),
-        ))
-      ]),
     );
+
   }
 
-  Widget _buildInfoCard() {
-    final patient = _controller.getmodelData();
+   Widget _buildInfoCard() {
+     final tmo = _controller.getModelData();
+     return Padding(
+       padding: const EdgeInsets.all(8.0),
+       child: Container(
+         margin: EdgeInsets.all(4),
+         padding: EdgeInsets.all(14),
+         decoration: BoxDecoration(
+             borderRadius: BorderRadius.circular(25),
+             border: Border.all(color: Theme.of(context).colorScheme.primary)),
+         child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+           children: [
+             _buildInfoRow('DOJ',  tmo.doj),
+             _buildInfoRow('Gender', tmo.geder),
+             _buildInfoRow('Number', tmo.Number),
+             _buildInfoRow('City', tmo.City),
+           ],
+         ),
+       ),
+     );
+   }
+  Widget _buildInfoRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        margin: EdgeInsets.all(4),
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            border: Border.all(color: Theme.of(context).colorScheme.primary)),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildInfoRow('DOB',  patient.DOB),
-            _buildInfoRow('Gender', patient.Gender),
-            _buildInfoRow('Number', patient.phone),
-            _buildInfoRow('City', patient.city),
-          ],
-        ),
-      ),
-    );
-  }
-    Widget _buildInfoRow(String label, String value) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-        child: Row(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
-            Text(value),
-          ],
-        ),
-      );
-    }
-}
-
-class CustomDropdownButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-
-  const CustomDropdownButton({
-    super.key,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.blueGrey),
-          borderRadius: BorderRadius.circular(30),
-          color: Colors.white,
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              label,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const Icon(Icons.keyboard_arrow_down),
-          ],
-        ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(fontWeight: FontWeight.w500),
+          ),
+          Text(value),
+        ],
       ),
     );
   }
 }
-
 
 class DropdownButton extends StatefulWidget {
   const DropdownButton({super.key});
@@ -134,7 +99,7 @@ class DropdownButton extends StatefulWidget {
 }
 
 class _DropdownButtonState extends State<DropdownButton> {
-  final List<String> Doctors = [ 'Dr.Arshad Ali','Dr.Saad','Dr.Bacha','Dr.Khan','Dr.Arshad'];
+  final List<String> Doctors = [ 'Arshad Ali',' Saad','Bacha','Khan','Arshad'];
   String? selectedValue;
   final _formKey = GlobalKey<FormState>();
 
@@ -158,8 +123,8 @@ class _DropdownButtonState extends State<DropdownButton> {
                   ),
                 ),
                 hint: const Text(
-                  'TMO',
-                    style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold)
+                    'Patient',
+                    style: TextStyle( fontSize: 23, fontWeight: FontWeight.bold )
                 ),
                 items: Doctors
                     .map((item) => DropdownMenuItem(
@@ -168,7 +133,7 @@ class _DropdownButtonState extends State<DropdownButton> {
                 ))
                     .toList(),
                 validator: (value) =>
-                value == null ? 'Please select Doctor' : null,
+                value == null ? 'Please select Patient' : null,
                 onChanged: (value) {},
                 onSaved: (value) => selectedValue = value,
                 buttonStyleData: const ButtonStyleData(
@@ -238,7 +203,7 @@ class _SingleDateSelectorState extends State<SingleDateSelector> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Date",style: TextStyle( fontSize: 23, fontWeight: FontWeight.bold),),
+            const Text("Date",style: TextStyle( fontSize: 23, fontWeight: FontWeight.w500),),
             const SizedBox(width: 16),
             IconButton(
               icon: const Icon(Icons.calendar_month_outlined,size: 35,),

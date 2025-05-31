@@ -6,22 +6,22 @@ import 'package:orthorec/TMO/Tmo_Models/Patient/patientrecordModel.dart';
 class PatientRecordController {
   final ImagePicker _picker = ImagePicker();
   List<PatientRecordModel> photos = [
-    PatientRecordModel(id: '1', title: 'Frontal at rest  4x3'),
-    PatientRecordModel(id: '2', title: 'Frontal at smile 4x3'),
-    PatientRecordModel(id: '3', title: 'Right profile at rest 4x3'),
-    PatientRecordModel(id: '4', title: 'Oblique at rest 4x3'),
-    PatientRecordModel(id: '5', title: 'Anterior 2x3.5'),
-    PatientRecordModel(id: '6', title: 'Right buccal 2x3'),
-    PatientRecordModel(id: '7', title: 'Left buccal 2x3'),
-    PatientRecordModel(id: '8', title: ' Upper occlusal, width 3'),
-    PatientRecordModel(id: '9', title: ' Lower occlusal, width 3'),
-    PatientRecordModel(id: '10', title: 'Anterior 2x3.5'),
-    PatientRecordModel(id: '11', title: 'Right buccal 2x3'),
-    PatientRecordModel(id: '12', title: 'Left buccal 2x3'),
-    PatientRecordModel(id: '13', title: ' Upper occlusal, width 3'),
-    PatientRecordModel(id: '14', title: ' Lower occlusal, width 3'),
-    PatientRecordModel(id: '15', title: 'Anterior 2x3.5'),
-    PatientRecordModel(id: '16 ', title: 'Anterior 2x3.5'),
+    PatientRecordModel(id: '1', title: 'Frontal at rest'),
+    PatientRecordModel(id: '2', title: 'Frontal at smile'),
+    PatientRecordModel(id: '3', title: 'Right profile at rest'),
+    PatientRecordModel(id: '4', title: 'Oblique at rest'),
+    PatientRecordModel(id: '5', title: 'Anterior '),
+    PatientRecordModel(id: '6', title: 'Right buccal '),
+    PatientRecordModel(id: '7', title: 'Left buccal '),
+    PatientRecordModel(id: '8', title: ' Upper occlusal'),
+    PatientRecordModel(id: '9', title: ' Lower occlusal'),
+    PatientRecordModel(id: '10', title: 'Anterior'),
+    PatientRecordModel(id: '11', title: 'Right buccal'),
+    PatientRecordModel(id: '12', title: 'Left buccal'),
+    PatientRecordModel(id: '13', title: ' Upper occlusal'),
+    PatientRecordModel(id: '14', title: ' Lower occlusal'),
+    PatientRecordModel(id: '15', title: 'Anterior'),
+    PatientRecordModel(id: '16 ', title: 'Anterior'),
   ];
 
   Future<void> selectImage(PatientRecordModel photo) async {

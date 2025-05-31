@@ -55,23 +55,14 @@ class _Patientrecord5screenState extends State<Patientrecord5screen> {
                       // mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(
+                          height: 20,
+                        ),
                         Text(
-                          "SECTION 1. PRE-TREATMENT ASSESSMENT ",
+                          "  PRE-TREATMENT RADIOGRAPH \n LATERAL CEPH",
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "  1.1 Pre-Treatment photographs ",
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          "  EXTRA-ORAL ",
-                          style: TextStyle(
-                            fontSize: 16,
                           ),
                         ),
                         Spacer(),
@@ -100,6 +91,14 @@ class _Patientrecord5screenState extends State<Patientrecord5screen> {
                                 Navigator.pop(context);
                               },
                             ),
+                            Spacer(),
+                            RoundIconButton(
+                              Icons.arrow_forward_ios_rounded,
+                                  () {
+                                Navigator.pushNamed(
+                                    context, "/table");
+                              },
+                            )
                           ],
                         )
                       ],

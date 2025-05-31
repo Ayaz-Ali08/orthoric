@@ -22,7 +22,7 @@ class _InlinePatientScreenState extends State<InlinePatientScreen> {
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Appointments_AppBar(Theme.of(context).colorScheme.primary),
-          Text("Inline Patient "),
+          Text("Patient Waiting List "),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),
