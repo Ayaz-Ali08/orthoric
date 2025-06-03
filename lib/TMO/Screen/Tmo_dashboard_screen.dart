@@ -1,8 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/TMO/Tmo_Controller/dashboard_controller.dart';
 import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'Patient/pageSwapnavigation.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -63,7 +65,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               final profile = snapshot.data!;
               return Stack(
                 clipBehavior: Clip.none,
-                alignment: Alignment.topCenter,
+                // alignment: Alignment.topCenter,
                 children: [
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 56, 16, 16),
@@ -72,16 +74,12 @@ class _DashboardScreenState extends State<DashboardScreen>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(height: 55),
-                        AnimatedTextKit(
-                          animatedTexts: [
-                            WavyAnimatedText(
-                                profile['name'],
-                              textStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 23
-                              )
-                            )],
+                        Text(
+                          profile['name'],
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23),
                         ),
                         const SizedBox(height: 30),
                         Card(
@@ -101,8 +99,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                       'Experience', profile['experience']),
                                   _buildProfileRow(
                                       'Specialty', profile['specialty']),
-                                  _buildProfileRow(
-                                      'Number', profile['phone']),
+                                  _buildProfileRow('Number', profile['phone']),
                                   const SizedBox(height: 16),
                                 ],
                               ),
@@ -113,17 +110,21 @@ class _DashboardScreenState extends State<DashboardScreen>
                     ),
                   ),
                   Positioned(
+                    left:MediaQuery.of(context).size.width / 2 - 70,
                     top: -60, // Half of avatar height
                     child: CircleAvatar(
                         radius: 70,
                         // backgroundColor: Colors.lightBlueAccent,
                         backgroundImage: NetworkImage(
-                            "https://images.drlogy.com/assets/uploads/img/practice-profile/hospitals/profile/dant-aarogyam-seva-sadan-e50f7e6102d-36c694851ab.png") // or NetworkImage(...)
+                            "https://www.bwcmiami.com/cms/thumbnails/00/540x303/images/blog/beautiful-blonde-smiling-with-straight-white-teeth.2009251016550.jpg") // or NetworkImage(...)
                         ),
                   ),
                 ],
               );
             },
+          ),
+          SizedBox(
+            height: 30,
           ),
           Rectanglerounded_Button(
             lable: "Appointment Details",
@@ -138,19 +139,13 @@ class _DashboardScreenState extends State<DashboardScreen>
             },
           ),
           Rectanglerounded_Button(
-            lable: "Patient Record",
-            imagepath: "Assets/Doctor_Registration.svg",
-            // "Assets/logo.png",
+            lable: "Patient Records",
+            imagepath: "Assets/doctor_registration.svg",
             ontap: () {
-              Navigator.pushNamed(context, "/patientrecord_1");
-            },
-          ),
-          Rectanglerounded_Button(
-            lable: "Appointments",
-            imagepath: "Assets/Doctor_Registration.svg",
-            // "Assets/logo.png",
-            ontap: () {
-              Navigator.pushNamed(context, "/appoinmentAssigning");
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SwapNavigationScreen()),
+              );
             },
           ),
         ],
@@ -260,24 +255,32 @@ void showAppointmentPopup(BuildContext context) {
                   runSpacing: 16,
                   children: [
                     Rectanglerounded_Button(
-                      lable: "Today Appointment",
+                      lable: "Today Appointments",
                       imagepath: "Assets/Today_Appointment.svg",
                       ontap: () {
                         Navigator.pushNamed(context, '/todayAppointment');
                       },
                     ),
                     Rectanglerounded_Button(
-                      lable: "Pending Appointment",
+                      lable: "Pending Appointments",
                       imagepath: "Assets/Pending_Appiontment.svg",
                       ontap: () {
                         Navigator.pushNamed(context, '/pendingAppointments');
                       },
                     ),
                     Rectanglerounded_Button(
-                      lable: "Missed Appointment",
+                      lable: "Missed Appointments",
                       imagepath: "Assets/Missed_Appiontment.svg",
                       ontap: () {
                         Navigator.pushNamed(context, '/missedAppointments');
+                      },
+                    ),
+                    Rectanglerounded_Button(
+                      lable: "Appointment Registrations",
+                      imagepath: "Assets/doctor_registration.svg",
+                      // "Assets/logo.png",
+                      ontap: () {
+                        Navigator.pushNamed(context, "/appoinmentAssigning");
                       },
                     ),
                   ],

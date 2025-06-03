@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Controller/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -59,6 +60,12 @@ class _LoginScreenState extends State<LoginScreen>
     if (success && mounted) {
       final username = _emailController.text.split('@').first;
 
+      // Save login state
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('isLoggedIn', true);
+      await prefs.setString('userRole', username); // Optional
+
+      // Navigate based on role
       if (username.startsWith('ad')) {
         Navigator.pushReplacementNamed(context, '/AdminDashbord');
       } else if (username.startsWith('pa')) {

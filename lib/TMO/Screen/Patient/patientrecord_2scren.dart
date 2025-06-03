@@ -133,7 +133,7 @@ class _PatientRecord_2ScrenState extends State<PatientRecord_2Scren> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 35,),
                         Row(
                           children: [
                             RoundIconButton(

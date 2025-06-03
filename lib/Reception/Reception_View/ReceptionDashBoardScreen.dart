@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
+import 'package:orthorec/Core/Utils/constant_Functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Reception_Controller/ReceptionDashBoardController.dart';
 import '../Reception_Model/ReceptionDashBoardModel.dart';
 
 class ReceptionDashbordScreen extends StatefulWidget {
-
   const ReceptionDashbordScreen({super.key});
 
   @override
@@ -14,13 +14,15 @@ class ReceptionDashbordScreen extends StatefulWidget {
       _ReceptionDashbordScreenState();
 }
 
-class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> with SingleTickerProviderStateMixin {
+class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen>
+    with SingleTickerProviderStateMixin {
   final ReceptionDashboradController _controller =
       ReceptionDashboradController();
   late List<ReceptionDashBordModels> _entries;
   bool _isLoading = false;
-  late AnimationController _animationController ;
-  late Animation<Offset> _animation ;
+  late AnimationController _animationController;
+
+  late Animation<Offset> _animation;
 
   @override
   void initState() {
@@ -30,8 +32,8 @@ class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> with 
       duration: Duration(seconds: 2),
     );
     _animation = Tween<Offset>(
-        begin: Offset(0, -1), // Start from offscreen
-        end: Offset.zero)
+            begin: Offset(0, -1), // Start from offscreen
+            end: Offset.zero)
         .animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.linear,
@@ -48,28 +50,53 @@ class _ReceptionDashbordScreenState extends State<ReceptionDashbordScreen> with 
     setState(() => _isLoading = false);
   }
 
-@override
+  @override
   void dispose() {
     _animationController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
         children: [
-          Appointments_AppBar(Theme.of(context).colorScheme.primary),
-          SizedBox(
-            height: 330,
+          Column(
+            children: [
+              DashbordAppBar(),
+              SizedBox(
+                height: 330,
+              ),
+              _receptiondashboardButton(
+                  img: "Assets/In_Line_Patient",
+                  ontap: () {
+                    Navigator.pushNamed(context, "/inlinePatient");
+                  },
+                  label: 'Patient Waiting Lists'),
+              _receptiondashboardButton(
+                  img: "Assets/In_Line_Patient",
+                  ontap: () {
+                    Navigator.pushNamed(context, "/newPatientEntry");
+                  },
+                  label: 'New Entry'),
+            ],
           ),
-          _receptiondashboardButton(
-              img: "Assets/In_Line_Patient", ontap: () {
-                Navigator.pushNamed(context, "/inlinePatient");
-          }, label: 'Patient Waiting List'),
-          _receptiondashboardButton(
-              img: "Assets/In_Line_Patient", ontap: () {
-                Navigator.pushNamed(context, "/newPatientEntry");
-          }, label: 'New Entry'),
+          Positioned(
+            top: 30,
+            left: MediaQuery.of(context).size.width / 1.1 - 15,
+            child: IconButton(
+              onPressed: () async {
+                // Clear login state from SharedPreferences
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.clear();
+                // Navigate to login screen
+                if (context.mounted) {
+                  Navigator.pushReplacementNamed(context, '/login');
+                }
+              },
+              icon: const Icon(Icons.logout_outlined, size: 35, color: Colors.white),
+            ),
+          ),
         ],
       ),
     );
@@ -101,12 +128,16 @@ class _receptiondashboardButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(vertical :4 ,horizontal: 8),
-              child: SvgPicture.asset(img, color: Colors.white, width: 40,height: 40,),
-
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: SvgPicture.asset(
+                img,
+                color: Colors.white,
+                width: 40,
+                height: 40,
+              ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical :4 ,horizontal: 8),
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
               child: Text(
                 label,
                 style: const TextStyle(color: Colors.white, fontSize: 18),

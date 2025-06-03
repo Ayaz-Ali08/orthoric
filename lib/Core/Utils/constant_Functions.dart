@@ -1,18 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class DashbordAppBar extends StatelessWidget {
-
+  const DashbordAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10), topRight: Radius.circular(10))),
       height: 125,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
+        ),
+      ),
+      child: Stack(
+        children: [
+          // Logout button at top-right
+          Positioned(
+            top: 30,
+            left: MediaQuery.of(context).size.width / 1.1 - 15,
+            child: IconButton(
+              onPressed: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.clear();
+                if (context.mounted) {
+                  Navigator.pushReplacementNamed(context, '/login');
+                }
+              },
+              icon: const Icon(
+                Icons.logout_outlined,
+                color: Colors.white,
+                size: 30,
+              ),
+            ),
+          ),
+          // Optional title or other decoration can be added here
+          // const Positioned(
+          //   bottom: 16,
+          //   left: 16,
+          //   child: Text(
+          //     'Dashboard',
+          //     style: TextStyle(
+          //       fontSize: 22,
+          //       fontWeight: FontWeight.bold,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 }

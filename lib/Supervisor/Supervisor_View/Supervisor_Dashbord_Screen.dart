@@ -1,49 +1,21 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
-
 import '../Supervisor_Controller/Supervisor_Dashbord_Controler.dart';
 
 class Supervisor_DashboardScreen extends StatefulWidget {
-
-
   Supervisor_DashboardScreen({super.key});
 
   @override
-  State<Supervisor_DashboardScreen> createState() => _Supervisor_DashboardScreenState();
+  State<Supervisor_DashboardScreen> createState() =>
+      _Supervisor_DashboardScreenState();
 }
 
-class _Supervisor_DashboardScreenState extends State<Supervisor_DashboardScreen> with SingleTickerProviderStateMixin{
+class _Supervisor_DashboardScreenState extends State<Supervisor_DashboardScreen>
+    with SingleTickerProviderStateMixin {
   final Dashbord_Controller _controller = Dashbord_Controller();
 
-  late AnimationController _animationController;
 
-  late Animation<Offset> _animation;
-
-@override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    );
-    _animation = Tween<Offset>(
-        begin: Offset(0, -1), // Start from offscreen
-        end: Offset.zero)
-        .animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.linear,
-    ));
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _animationController.forward();
-    });
-  }
-  @override
-  void dispose() {
-  _animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +29,11 @@ class _Supervisor_DashboardScreenState extends State<Supervisor_DashboardScreen>
               const SizedBox(
                 height: 90,
               ),
-              AnimatedTextKit(
-                animatedTexts: [
-                  WavyAnimatedText(
-                      "Dr.Khan Shab",
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23
-                      )
-                  )],
-              ),
+              Text("Dr.Khan Shab",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23)),
               const SizedBox(
                 height: 60,
               ),
@@ -81,7 +47,7 @@ class _Supervisor_DashboardScreenState extends State<Supervisor_DashboardScreen>
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     child: DashboardButton(
                       title: item.title,
-                      img:  item.img,
+                      img: item.img,
                       onPressed: () => Navigator.pushNamed(context, item.route),
                     ),
                   );
@@ -133,14 +99,18 @@ class DashboardButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SvgPicture.asset(img,color: Colors.white,width: 40,height: 40,),
+          SvgPicture.asset(
+            img,
+            color: Colors.white,
+            width: 40,
+            height: 40,
+          ),
           Text(
             title,
-            style: TextStyle(color: textColor ?? Colors.white ,fontSize: 20),
+            style: TextStyle(color: textColor ?? Colors.white, fontSize: 20),
           ),
         ],
       ),
     );
-
   }
 }

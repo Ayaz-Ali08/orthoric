@@ -80,6 +80,9 @@ class _Patientrecord4screenState extends State<Patientrecord4screen> {
                     ],
                   ),
                   Spacer(),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     children: [
                       RoundIconButton(
@@ -97,7 +100,8 @@ class _Patientrecord4screenState extends State<Patientrecord4screen> {
                         },
                       )
                     ],
-                  )
+                  ),
+                 SizedBox( height: 40,)
                 ],
               );
             },

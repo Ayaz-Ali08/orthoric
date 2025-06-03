@@ -100,7 +100,8 @@ class _Patientrecord5screenState extends State<Patientrecord5screen> {
                               },
                             )
                           ],
-                        )
+                        ),
+                        SizedBox(height: 40,)
                       ],
                     );
                   },

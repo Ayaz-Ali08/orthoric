@@ -1,8 +1,8 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/TMO/Tmo_Controller/AppointmentAssiging_controller.dart';
+import 'package:orthorec/TMO/Tmo_Core/Utils/constant_Functions.dart';
 
 class AppointmentAssigingScreen extends StatefulWidget {
   const  AppointmentAssigingScreen({super.key});
@@ -22,8 +22,8 @@ class _AppointmentAssigingScreenState extends State<AppointmentAssigingScreen> {
         children: [
           Column(
             children: [
-              DashbordAppBar(),
-              const SizedBox(height: 90),
+              Appointments_AppBar(Theme.of(context).colorScheme.primary),
+              const SizedBox(height: 100),
               Text(
                 tmo.Name,
                 style: const TextStyle(
@@ -38,7 +38,7 @@ class _AppointmentAssigingScreenState extends State<AppointmentAssigingScreen> {
           ),
           Positioned(
               left: MediaQuery.of(context).size.width / 2 - 75,
-              top: 60,
+              top:50,
               child: CircleAvatar(
                 radius: 70,
                 backgroundImage: NetworkImage(

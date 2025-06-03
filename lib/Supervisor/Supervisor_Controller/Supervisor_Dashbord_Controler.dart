@@ -6,13 +6,13 @@ class Dashbord_Controller {
     return const [
       DashbordItem(
         id: '1',
-        title: 'Patient Waiting List',
+        title: 'Patient Waiting Lists',
         img: "Assets/In_Line_Patient.svg",
         route: '/inlinePatient',
       ),
       DashbordItem(
         id: '2',
-        title: 'Doctor Registration',
+        title: 'Doctor Registrations',
         img: "Assets/doctor_registration.svg",
         route: '/tmoRegistration',
       ),
@@ -24,13 +24,13 @@ class Dashbord_Controller {
       ),
       DashbordItem(
         id: '4',
-        title: 'Appointment Detail',
+        title: 'Appointment Details',
         img: "Assets/Appointment_detail.svg",
         route: '/tmoList',
       ),
       DashbordItem(
         id: '5',
-        title: 'Patient Record',
+        title: 'Patient Records',
         img: "Assets/Datewise_record.svg",
         route: '/dateWiseRecord',
       ),

@@ -138,9 +138,8 @@ class _Patientrecord3screnState extends State<Patientrecord3scren> {
                             ),
                           ],
                         ),
+                        SizedBox( height: 50,),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             RoundIconButton(
                               Icons.arrow_back_ios_new_outlined,
@@ -148,6 +147,7 @@ class _Patientrecord3screnState extends State<Patientrecord3scren> {
                                 Navigator.pop(context);
                               },
                             ),
+                              Spacer(),
                             RoundIconButton(
                               Icons.arrow_forward_ios_rounded,
                               () {

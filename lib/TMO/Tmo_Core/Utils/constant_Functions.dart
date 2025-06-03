@@ -143,7 +143,7 @@ class Rectanglerounded_Button extends StatelessWidget {
           onTap: ontap,
           child: Container(
             // margin: EdgeInsets.all(10),
-            // height:60,
+            height:80,
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(38)),

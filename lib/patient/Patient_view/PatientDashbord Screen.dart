@@ -1,8 +1,8 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:orthorec/Core/Utils/constant_Functions.dart';
 import 'package:orthorec/patient/Patient_Model/PatientDashBard_model.dart';
 import 'package:orthorec/patient/Patient_Controller/PatientDashborad_Controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientDashBoardScreen extends StatefulWidget {
   final String patientId;
@@ -79,17 +79,12 @@ class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> with Si
               SizedBox(
                 height: 90,
               ),
-              AnimatedTextKit(
-                animatedTexts: [
-                  WavyAnimatedText(
-                      _patient.name,
-                      textStyle: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 23
-                      )
-                  )],
-              ),
+              Text( _patient.name,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23
+                  )),
               Expanded(
                 child: _isLoading
                     ? const Center(child: CircularProgressIndicator())
@@ -179,7 +174,7 @@ class _PatientDashBoardScreenState extends State<PatientDashBoardScreen> with Si
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Previous Treatment",
+                "Previous Treatments",
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
               Text(

@@ -19,10 +19,12 @@ class _InlinePatientScreenState extends State<InlinePatientScreen> {
 
     return Scaffold(
       body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Appointments_AppBar(Theme.of(context).colorScheme.primary),
-          Text("Patient Waiting List "),
+          Text(
+            "Patient Waiting List ",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsets.all(16),

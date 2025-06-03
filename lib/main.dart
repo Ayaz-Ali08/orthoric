@@ -11,6 +11,7 @@ import 'package:orthorec/tmo/Screen/Patient/Patientrecord_3scren.dart';
 import 'package:orthorec/tmo/Screen/Patient/Patientrecord_4Screen.dart';
 import 'package:orthorec/tmo/Screen/Patient/patientrecord_2scren.dart';
 import 'package:orthorec/tmo/Screen/TreatmentProgress_Screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Reception/Reception_View/InlinePatient_Screen.dart';
 import 'Reception/Reception_View/PatientRegistrationRec.dart';
 import 'Reception/Reception_View/TmoDateAsigning_ReceptionScreen.dart';
@@ -23,15 +24,41 @@ import 'TMO/Screen/Patient/TableView.dart';
 import 'View/login_screen.dart';
 import 'TMO/Screen/Tmo_dashboard_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+  final userRole = prefs.getString('userRole') ?? '';
+
+  runApp(MyApp(isLoggedIn: isLoggedIn, userRole: userRole));
 }
 
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+  final bool isLoggedIn;
+  final String userRole;
+
+  const MyApp({super.key, required this.isLoggedIn, required this.userRole});
 
   @override
   Widget build(BuildContext context) {
+
+    Widget home;
+
+    if (!isLoggedIn) {
+      home = const SplashScreen();
+    } else if (userRole.startsWith('ad')) {
+      home = Supervisor_DashboardScreen();
+    } else if (userRole.startsWith('pa')) {
+      home = const PatientDashBoardScreen(patientId: "1");
+    } else if (userRole.startsWith('tm')) {
+      home = const DashboardScreen();
+    } else if (userRole.startsWith('re')) {
+      home = const ReceptionDashbordScreen();
+    } else {
+      home = const SplashScreen();
+    }
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
@@ -85,11 +112,11 @@ class MyApp extends StatelessWidget {
           return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) => route,
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              const begin = Offset(1.0, 0.0);
+              const begin = Offset(1.0, 0.5);
               const end = Offset.zero;
               const curve = Curves.linear;
 
-              // var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+              var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
               return FadeTransition(
                 opacity: animation,
@@ -98,10 +125,8 @@ class MyApp extends StatelessWidget {
             },
           );
         }
-
         return null;
-      },
-
+      },home: home,
     );
   }
 }

@@ -117,7 +117,7 @@ class _PatientRecord_1ScrenState extends State<PatientRecord_1Scren> {
                         ],
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 60,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

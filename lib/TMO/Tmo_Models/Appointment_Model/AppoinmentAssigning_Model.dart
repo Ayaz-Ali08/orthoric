@@ -1,10 +1,8 @@
 class AppointmentAssiging {
+
   final String Name;
-
   final String doj;
-
   final String Number;
-
   final String City;
   final String geder;
   final String patient;
